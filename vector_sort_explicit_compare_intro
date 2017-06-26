@@ -1,0 +1,111 @@
+Sort syntax:
+template <class RandomAccessIterator>
+  void sort ( RandomAccessIterator first, RandomAccessIterator last );
+
+template <class RandomAccessIterator, class Compare>
+  void sort ( RandomAccessIterator first, RandomAccessIterator last, Compare comp );
+  
+If you want sort in descending order, just use:
+std::greater<int>()
+as third parameter
+
+NOTE:We cannot use std::sort to sort std::list which is a single-linked list because std::sort requires random access iterators, 
+to work, which std::list does not have. For std::list, we can use its sort member function instead.
+
+std::sort calls std::less for its comparison and std::less, in turn, calls the < operator of the element type.For your own custom
+classes, you need to define our own < operator. There are two ways to go about defining your own < operator, you can define it as 
+either a global < operator or member < operator function of the class.
+->Global '<' Operator
+ Eg:
+class Person
+{
+public:
+	// default constructor
+	Person() : age(0) {}
+	Person(int age, std::string name) {
+		this->age = age; this->name = name;
+	}
+	int age;
+	std::string name;
+};
+
+inline bool operator<(const Person& a, const Person& b)
+{
+	return a.age < b.age;
+}
+
+in main: std::vector<Person> vecPerson;
+sort call: std::std::sort(vecPerson.begin(),vecPerson.end());
+
+->Member < Operator
+class Person
+{
+public:
+	// default constructor
+	Person() : age(0) {}
+	Person(int age, std::string name) {
+		this->age = age; this->name = name;
+	}
+	bool operator<(const Person& rhs)
+	{
+		return this->age < rhs.age;
+	}
+	int age;
+	std::string name;
+}
+in main: std::vector<Person> vecPerson;
+sort call: std::sort(vecPerson.begin(),vecPerson.end());
+
+->Function Pointer as Comparison Function
+class Person
+{
+public:
+	// default constructor
+	Person() : age(0) {}
+	Person(int age, std::string name) {
+		this->age = age; this->name = name;
+	}
+
+	int age;
+	std::string name;
+};
+
+bool Greater(const Person& a, const Person& b)
+{
+	if(a.age == b.age)
+		return a.name < b.name;
+
+	return a.age > b.age;
+}
+in main: std::vector<Person> vecPerson;
+sort call: std::sort(vecPerson.begin(),vecPerson.end(),Greater);
+
+->Functor as comparision funtion
+Function object/Functor is actually a class with the () operator overloaded.eg:
+class Person
+{
+public:
+	// default constructor
+	Person() : age(0) {}
+	Person(int age, std::string name) {
+		this->age = age; this->name = name;
+	}
+
+	int age;
+	std::string name;
+};
+
+// function object
+struct GreaterAge : public std::binary_function<Person,Person,bool>
+{
+	inline bool operator()(const Person& a, const Person& b)
+	{
+		if(a.age == b.age)
+			return a.name < b.name;
+
+		return a.age > b.age;
+	}
+};
+
+in main: std::vector<Person> vecPerson;
+sort call: std::sort(vecPerson.begin(),vecPerson.end(),GreaterAge());
