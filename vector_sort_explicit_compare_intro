@@ -109,3 +109,19 @@ struct GreaterAge : public std::binary_function<Person,Person,bool>
 
 in main: std::vector<Person> vecPerson;
 sort call: std::sort(vecPerson.begin(),vecPerson.end(),GreaterAge());
+
+NOTE:binary_function is just a base class, from which specific binary function objects are derived. It has no operator() member
+defined (which derived classes are expected to define) - it simply has three public data members that are typedefs of the 
+template parameters. It is defined as:
+
+template <class Arg1, class Arg2, class Result>
+  struct binary_function {
+    typedef Arg1 first_argument_type;
+    typedef Arg2 second_argument_type;
+    typedef Result result_type;
+  };
+  
+  
+  
+  
+  
