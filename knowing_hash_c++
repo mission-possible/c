@@ -1,0 +1,66 @@
+Hash Function Properties:
+->A hash function maps key to integer
+->A hash function can result in a many-to-one mapping(causing collision)
+->Collision cannot be avoided but its chances can be reduced using good hash function.
+
+A good Hash Function Properties:
+->Reduced chance of collision(Different keys should ideally map to different indices)
+->Distribute keys uniformly over table
+->Should be fast to compute
+
+Factors affecting Hash Table Design:
+1.Hash function
+2.Table size(Usually fixed at the start)
+3.Collision handling scheme
+
+Techniques to deal with collision:
+->Chaining--Store colliding keys in a linked list at the same hash table index
+->Open addressing --Store colliding keys elsewhere in the table
+->Double hashing--Use one hash function to determine the slot, and a second hash function determines the jump size for the 
+                  probing sequence.
+
+Collision Resolution by Chaining: Analysis
+load factor, a=n/m 
+where, n=no of elements in the hash table
+       m=no of slots in the hash table
+=>a== average no of elements per slot
+
+On unsuccessfull search:T(n)=O(a)
+On successfull search:T(n)=O(a/2)
+
+Rehashing
+Increases the size of the hash table when load factor becomes “too high” (defined by a cutoff).Typically expand the table to 
+twice its size (but still prime).Need to reinsert all existing elements into new hash table.
+When to rehash:
+1.When load factor reaches some threshold
+2.When an insertion fails
+
+Problem with Large Tables:
+We can store the lasrge table on disc, but at time of collision and rehashing, multiple disc accesses will be required..:(
+Solution: use 'Extendible Hashing'
+
+
+Why do hash functions use prime numbers? 
+s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]
+using int arithmetic, where s[i] is the ith character of the string, n is the length of the string, and ^ indicates 
+exponentiation. Why is 31 used as a multiplier? And why should hash table should be prime?
+
+Primes are unique numbers. They are unique in that, the product of a prime with any other number has the best chance of being 
+unique (not as unique as the prime itself of-course) due to the fact that a prime is used to compose it. This property is used
+in hashing functions.However using primes is an old technique. The key here to understand that as long as you can generate a 
+sufficiently unique key you can move to other hashing techniques too.
+
+Well, when you stick your keys in the containers, depending on the prime used, you would get a different key number and 
+therefore a different distribution of the keys in your array.So the same key “abc” would be a*31+b*31+c*31 for prime 31 and 
+it would generate a different key for the abc with 29 – a*29+b*29+c*29.
+Since the key produced is different, the data would go into a different location depending on the prime used.Researchers found 
+that using a prime of 31 gives a better distribution to the keys, and lesser no of collisions.Given a string “Samuel”, you can 
+generate a unique hash by multiply each of the constituent digits or letters with a prime number and adding them up. This is why 
+primes are used.
+
+One probable proof of successfull use of prime no can be found on:
+http://srinvis.blogspot.in/2006/07/hash-table-lengths-and-prime-numbers.html
+
+
+
+
