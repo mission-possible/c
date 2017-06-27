@@ -1,0 +1,27 @@
+(a * b) mod m = ((a mod m) * (b mod m)) mod m
+(a + b) mod m = ((a mod m) + (b mod m)) mod m
+
+Essentially, for each basic addition and basic subtraction, you replace it with an "advanced" version that mod the operands, and 
+mod the results. Since operands to the basic multiplication are now in the range of 0..m-1, the biggest number you'll get is 
+(m-1)^2, which can alleviate overflow if m is small enough.
+
+->-1 mod 2 = 1 mathematically, but -1 % 2 in Java is -1.
+
+Why to choose a prime number as 'mod' while calculating hash value for certain key(example, why should i not choose 32 as 
+multiplier in horner's rule):
+32 is a terrible choice of multiplier for hash functions of this class (since it's not a prime), especially for computing 
+(since it's a power of 2). Much better is 31, because:
+-?It's prime (mathematically important!)
+->It's one less than a power of two, so it can be optimized to a cheaper shift and subtract
+        31 * i == (i << 5) - i
+        
+Horner's rule for hash value calculation:
+int hashCode(String key) {
+    int hashVal = 0;
+    for (int j = 0; j < key.length(); j++) {
+        // For small letters.
+        int letter = key.charAt(j) - 96; 
+        hashVal = (hashVal * 32 + letter) % arraySize; // mod
+    }
+    return hashVal;
+}
