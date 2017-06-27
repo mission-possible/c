@@ -1,0 +1,74 @@
+Declaration:
+    ->unordered_map<int, int> A; // declares an empty map. O(1)
+    ->std::unordered_map<int,int> second = {{1,10},{2,20},{3,30}}; //declare a map with 3 key value pair
+    
+Adding an key, value pair:
+    ->A.insert(key, value); // O(1) time on average
+    
+      std::unordered_map<std::string,double> myrecipe,mypantry = {{"milk",2.0},{"flour",1.5}};
+      std::pair<std::string,double> myshopping ("baking powder",0.3);
+    ->myrecipe.insert (myshopping);                        // copy insertion
+    ->myrecipe.insert (std::make_pair<std::string,double>("eggs",6.0)); // move insertion
+    ->myrecipe.insert (mypantry.begin(), mypantry.end());  // range insertion
+    ->myrecipe.insert ( {{"sugar",0.8},{"salt",0.1}} );    // initializer list insertion
+
+Element access:
+      for (auto& x: myrecipe)
+        std::cout << x.first << ": " << x.second << std::endl;
+        
+Find the value for key = K:
+      if (A.find(K) == A.end()) return null; //  means that K does not exist in A. 
+      else return A[K];    // O(1) average case. Rare worst case O(n). 
+
+Size ( number of elements ) of the vector :
+      A.size()  // O(1)
+
+Erase from the map :
+      if (A.find(K) != A.end()) A.erase(A.find(K));
+       OR A.erase(K);
+       
+Swap two unordered map:
+      first.swap(second);
+      
+Rehash:
+      void rehash( size_type n );
+Sets the number of buckets in the container to n or more.By calling rehash to reserve a certain minimum amount of buckets in the hash table, we avoid the multiple rehashes that the expansion of the container may cause.
+
+ mymap.max_size()=Returns the maximum number of elements that the unordered_map container can hold.
+ mymap.max_bucket_count()=Returns the maximum number of buckets that the unordered_map container can have.
+ mymap.max_load_factor()= returns the current maximum load factor for the unordered_map container.
+ mymap.max_load_factor(float z)= sets z as the new maximum load factor for the unordered_map container.
+ 
+ By default, unordered_map containers have a max_load_factor of 1.0.
+ 
+ hash_function:
+      hasher hash_function() const;
+      Returns the hash function object used by the unordered_map container.
+      eg:
+typedef std::unordered_map<std::string,std::string> stringmap;
+int main ()
+{
+  stringmap mymap;
+
+  stringmap::hasher fn = mymap.hash_function();
+
+  std::cout << "this: " << fn ("this") << std::endl;
+  std::cout << "thin: " << fn ("thin") << std::endl;
+
+  return 0;
+}
+Possible output:
+
+this: 671344778
+thin: 3223852919
+
+mymap.bucket_count()=returns no of  bucket
+mymap.bucket_size(i)=returns no of elements in bucket 'i'
+mymap.bucket (x.first)=returns bucket no of key 'x.first'
+
+
+
+
+
+
+
