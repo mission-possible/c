@@ -1,14 +1,11 @@
 //Find the largest continuous sequence in a array which sums to zero.
 
-vector<int> lszero(vector<int> &sequence) {
-        
+vector<int> lszero(vector<int> &sequence) {        
         int N = sequence.size();
         vector<int> sum;
         if(N == 0)
-                return sum; // empty vector
-
+            return sum; // empty vector
         sum.push_back(sequence[0]);
-
         for(int i = 1; i < N; ++i) {
             sum.push_back(sequence[i] + sum[i - 1]);
         }
@@ -24,18 +21,21 @@ vector<int> lszero(vector<int> &sequence) {
                     start = temp_start;
                     end = temp_end;
                 } 
-            } else {
+            } 
+            else {
                 if(hash.find(sum[i]) != hash.end()) {
                     int temp_start = hash[sum[i]] + 1;
                     int temp_end = i + 1;
                     if(temp_end - temp_start > end - start) {
                         start = temp_start;
                         end = temp_end;                  
-                    } else if(temp_end - temp_start == end - start && temp_start < start) {
+                    } 
+                    else if(temp_end - temp_start == end - start && temp_start < start) {
                         start = temp_start;
                         end = temp_end;
                     }
-                } else {
+                } 
+                else {
                     hash[sum[i]] = i;
                 }
             }
@@ -48,6 +48,6 @@ vector<int> lszero(vector<int> &sequence) {
         }
 
         return ans;
-    }
+}
     
     
