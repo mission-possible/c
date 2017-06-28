@@ -8,8 +8,7 @@ vector<int> lszero(vector<int> &sequence) {
         sum.push_back(sequence[0]);
         for(int i = 1; i < N; ++i) {
             sum.push_back(sequence[i] + sum[i - 1]);
-        }
-        
+        }        
         int start = 0;
         int end = 0;
         map<int, int> hash;
@@ -40,13 +39,10 @@ vector<int> lszero(vector<int> &sequence) {
                 }
             }
         }
-
         vector<int> ans;
-
         for(int i = start; i < end; ++i) {
             ans.push_back(sequence[i]);
         }
-
         return ans;
 }
     
