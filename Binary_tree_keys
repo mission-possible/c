@@ -1,0 +1,12 @@
+1)FULL BINARY TREE- A full binary tree is a binary tree in which every node other than the leaves has two children.This is also 
+  called strictly binary tree.
+  
+2)PERFECT BINARY TREE- A full binary tree with all levels completely filled.
+
+3)COMPLETE BINARY TREE- A Binary Tree is complete Binary Tree if all levels are completely filled except possibly the last level
+  and the last level has all keys as left as possible.
+  "except possibly the last level" part of above definition specifies exception which need to satisfied always.Last level may or 
+  may not be completely filled.
+  
+4)ALMOST COMPLETE BINARY TREE-When the exception in the definition of complete binary tree holds then it is called almost complete binary tree or nearly 
+  complete binary tree.
