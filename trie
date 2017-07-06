@@ -10,3 +10,23 @@ for each of the 26 letters of the English alphabet
 Strings are stored in a top to bottom manner on the basis of their prefix in a trie. All prefixes of length 1 are stored at until 
 level 1, all prefixes of length 2 are sorted at until level 2 and so on. 
 
+ If we store keys in binary search tree, a well balanced BST will need time proportional to M * log N, where M is maximum string 
+ length and N is number of keys in tree. Using trie, we can search the key in O(M) time. However the penalty is on trie storage 
+ requirements.
+ 
+ // Trie node
+struct TrieNode{
+     struct TrieNode *children[ALPHABET_SIZE];  //array of pointers to next level trie nodes
+     bool isLeaf;       // isLeaf is true if the node represents end of a word
+};
+
+The pseudo code for insertion of a string into a tire would look as follows:
+void insert(String s){
+    for(every char in string s){
+        if(child node belonging to current char is null){
+            child node=new Node();
+        }
+        current_node=child_node;
+    }
+}
+
