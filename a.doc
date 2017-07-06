@@ -1,0 +1,25 @@
+The Segment Tree of array A of size 7
+
+will look like :
+
+enter image description here
+
+enter image description here
+
+Take an example. Given an array A
+of size N
+
+and some queries. There are two types of queries:
+
+    Update: Given idx
+
+and val, update array element A[idx] as A[idx]=A[idx]+val
+.
+Query: Given l
+and r return the value of A[l]+A[l+1]+A[l+2]+…..+A[r−1]+A[r] such that 0≤l≤r<N
+
+Queries and Updates can be in any order.
+
+Naive Algorithm:
+This is the most basic approach. For every query, run a loop from l
+to r and calculate the sum of all the elements. So each query will take O(N) time.
