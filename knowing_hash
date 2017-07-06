@@ -39,6 +39,16 @@ Problem with Large Tables:
 We can store the lasrge table on disc, but at time of collision and rehashing, multiple disc accesses will be required..:(
 Solution: use 'Extendible Hashing'
 
+Double hashing:
+Double hashing is similar to linear probing and the only difference is the interval between successive probes. Here, the interval
+between probes is computed by using two hash functions.
+Let us say that the hashed index for an entry record is an index that is computed by one hashing function and the slot at that 
+index is already occupied. You must start traversing in a specific probing sequence to look for an unoccupied slot. The probing 
+sequence will be:
+index = (index + 1 * indexH) % hashTableSize;
+index = (index + 2 * indexH) % hashTableSize;
+and so on…
+Here, indexH is the hash value that is computed by another hash function.
 
 Why do hash functions use prime numbers? 
 s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]
