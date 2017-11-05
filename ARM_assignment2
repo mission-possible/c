@@ -1,0 +1,91 @@
+1> Implement Fibonacci  series using Cortex M4
+     PRESERVE8
+     THUMB
+     AREA     appcode, CODE, READONLY
+     EXPORT __main
+	 ENTRY 
+__main  FUNCTION
+		MOV R0,#0	; fibbonaci series will start from 0
+		MOV R1,#1	; second element in fibbonaci element is 1
+		MOV R3,#500	; series limit
+		MOV R4,#0	
+		MOV R5,#0x30000000	; address from which series will be stored
+		ADD R4,R0,R1	; 
+loop1 	CMP R4,R3
+		BLE LOOP
+		B stop
+LOOP 	STR R4,[R5],#1
+		MOV R0,R1
+		MOV R1,R4
+		ADD R4,R0,R1
+		B loop1
+stop    B stop
+loop	B loop
+	ENDFUNC
+	END
+ 
+ 
+ 
+2> Given three number find the largest of the three using Cortex M4
+     PRESERVE8
+     THUMB
+     AREA     appcode, CODE, READONLY
+     EXPORT __main
+	 ENTRY 
+__main  FUNCTION
+		MOV R1, #13 ; variable-1
+		MOV R2, #8 ; variable-2
+		MOV R3, #11 ; variable-3
+		CMP R1, R2
+		IT GE
+		BGE chk1
+		CMP R2, R3
+		ITE GE
+		MOVGE R4, r2
+		MOVLT R4, R3
+		B exit
+chk1	CMP R1, R3
+		ITE GE
+		MOVGE R4, R1 ; maximum among three variable will be stored in R4
+		MOVLT R4, R3
+exit	B exit
+	ENDFUNC
+	END 
+ 
+ 
+3> Given a number find out whether it is even or ODD in Cortex M4
+     PRESERVE8
+     THUMB
+     AREA     appcode, CODE, READONLY
+     EXPORT __main
+	 ENTRY 
+__main  FUNCTION
+		MOV R1, #5
+		AND R2, R1, #1	; if value of R1 is odd then R2 will contain 1 else 0
+loop	B loop
+	ENDFUNC
+	END 
+ 
+4>Can we do nested IF-Then else in CORTEX M4 ?
+answer : Yes, we can use branch instruction with if-then instruction.
+ 
+ 
+6> Here is C program to find GCD of two numbers, Re-Write this for CORTEX M4
+     PRESERVE8
+     THUMB
+     AREA     appcode, CODE, READONLY
+     EXPORT __main
+	 ENTRY 
+__main  FUNCTION
+		MOV R1, #6
+		MOV R2, #8
+while	CMP R1, R2
+		IT EQ
+		BEQ loop
+		ITE GT
+		SUBGT R1, R1, R2
+		SUBLE R2, R2, R1
+		B while
+loop	B loop
+	ENDFUNC
+	END
