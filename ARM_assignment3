@@ -1,0 +1,75 @@
+Problem 1:
+~~~~~~~~~~
+
+1:
+- The total number of digits in a number is called its precision. For example, the number 24.789 has a precision of 5. Yes, both the exponent part and the mantisa part play a vital role in the defining the Precession of the number. If there is more number of bits to represent exponent, this means we can represent large positive as well as negative number using it. Which means more precision. If there are more number of bits to represents mantisa, then we can represent more number of bits in fraction part. This again increases the precision.
+
+2:
+-Subnormal values: When exponent part contains all zeros and fraction part contain not all zeros. Leading bit of the significand of a subnormal number is 0.
+-Normal values: Leading bit of the significant (the bit to left of the binary point) of a normal number is 1.
+
+- maximum normal number : 7f7fffff(bit pattern) and 3.40282347e+38(in decimal).
+- minimum positive normal number : 00800000(bit pattern) and 1.17549435e-38(in decimal).
+- maximum subnormal number  : 007fffff(bit pattern) and 1.17549421e-38(in decimal).
+- minimum positive subnormal number  : 00000001(bit pattern) and 1.40129846e-45(in decimal).
+
+
+3:
+There are two broad categories of rounding rules :
+	(1) Rounding to nearest
+		(i) Round to nearest, ties to even
+		(ii) Round to nearest, ties away from zero
+	(2) Directed roundings
+		(i)	Round toward 0
+		(ii) Round toward positive infinity 
+		(iii) Round toward negative infinity
+
+Example of rounding to integers using the IEEE 754 rules :-
+Mode / Example Value              +121.5		+12.5		−311.5		−12.5
+===============================================================================
+to nearest, ties to even          +122.0		+12.0		−312.0		−12.0
+
+to nearest, ties away from zero		+122.0		+13.0		−312.0		−13.0
+
+toward 0							            +121.0		+12.0		−311.0		−12.0
+
+toward +∞							            +122.0		+13.0		−311.0		−12.0
+
+toward −∞							            +121.0		+12.0		−312.0		−13.0
+
+Problem 2:
+~~~~~~~~~~
+     PRESERVE8
+     THUMB
+     AREA     appcode, CODE, READONLY
+     EXPORT __main
+	 ENTRY 
+__main  FUNCTION
+		VMOV.F32 S10, #6		; S10 = x = 6
+        VMOV.F32 S0, S10		; S0 = x <numerator>
+		VMOV.F32 S1, #1			; S1 = 1 <denominator>
+		VMOV.F32 S14, #1		; Counter for factorial
+		VMOV.F32 S2, #1			; initial value of ans(S2)
+		MOV R1, #1
+		MOV R2, #20			; number of iteration
+		VMOV.F32 S4, #1			; used to increment S14 by 1
+		; in loop
+		; S3 = S0 / S1
+		; S2 = S2 + S3
+		; S0 = S0 * S10
+		; S1 = S1 * S14
+		; loop back
+while	CMP R1, R2
+		IT GT
+		BGT loop
+		VDIV.F32 S3, S0, S1
+		VADD.F32 S2, S2, S3
+		VMUL.F32 S0, S0, S10
+		VADD.F32 S14, S14, S4
+		VMUL.F32 S1, S1, S14
+		ADD R1, R1, #1
+		B while
+loop	B loop
+	ENDFUNC
+
+	END
