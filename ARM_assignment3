@@ -2,10 +2,15 @@ Problem 1:
 ~~~~~~~~~~
 
 1:
-- The total number of digits in a number is called its precision. For example, the number 24.789 has a precision of 5. Yes, both the exponent part and the mantisa part play a vital role in the defining the Precession of the number. If there is more number of bits to represent exponent, this means we can represent large positive as well as negative number using it. Which means more precision. If there are more number of bits to represents mantisa, then we can represent more number of bits in fraction part. This again increases the precision.
+- The total number of digits in a number is called its precision. For example, the number 24.789 has a precision of 5. Yes, 
+both the exponent part and the mantisa part play a vital role in the defining the Precession of the number. If there is more 
+number of bits to represent exponent, this means we can represent large positive as well as negative number using it. Which 
+means more precision. If there are more number of bits to represents mantisa, then we can represent more number of bits in 
+fraction part. This again increases the precision.
 
 2:
--Subnormal values: When exponent part contains all zeros and fraction part contain not all zeros. Leading bit of the significand of a subnormal number is 0.
+-Subnormal values: When exponent part contains all zeros and fraction part contain not all zeros. Leading bit of the significand 
+of a subnormal number is 0.
 -Normal values: Leading bit of the significant (the bit to left of the binary point) of a normal number is 1.
 
 - maximum normal number : 7f7fffff(bit pattern) and 3.40282347e+38(in decimal).
@@ -25,17 +30,18 @@ There are two broad categories of rounding rules :
 		(iii) Round toward negative infinity
 
 Example of rounding to integers using the IEEE 754 rules :-
-Mode / Example Value              +121.5		+12.5		−311.5		−12.5
-===============================================================================
-to nearest, ties to even          +122.0		+12.0		−312.0		−12.0
+Mode / Example Value              	+121.5		+12.5		−311.5		−12.5
+==============================================================================================
+to nearest, ties to even          	+122.0		+12.0		−312.0		−12.0
 
 to nearest, ties away from zero		+122.0		+13.0		−312.0		−13.0
 
-toward 0							            +121.0		+12.0		−311.0		−12.0
+towards 0				+121.0		+12.0		−311.0		−12.0
 
-toward +∞							            +122.0		+13.0		−311.0		−12.0
+towards +∞				+122.0		+13.0		−311.0		−12.0
 
-toward −∞							            +121.0		+12.0		−312.0		−13.0
+towards −∞				+121.0		+12.0		−312.0		−13.0
+
 
 Problem 2:
 ~~~~~~~~~~
